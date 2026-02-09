@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For My Love ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Inter:wght@300;400;600;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff4d94;
+            --primary-light: #ff85b3;
+            --primary-dark: #c2185b;
+            --bg-overlay: rgba(255, 245, 247, 0.92);
+            --glass: rgba(255, 255, 255, 0.75);
+            --glass-dark: rgba(255, 255, 255, 0.9);
+            --border: rgba(255, 255, 255, 0.8);
+            --accent: #ffb6c1;
+            --shadow: 0 8px 32px rgba(255, 77, 148, 0.15);
+            --shadow-hover: 0 16px 48px rgba(255, 77, 148, 0.25);
+            --success-gradient: radial-gradient(circle at top right, #fff0f5 0%, #ffe4e1 100%);
+        }
+
+        * { 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            background: 
+                linear-gradient(135deg, rgba(255, 245, 247, 0.95) 0%, rgba(255, 228, 225, 0.9) 100%),
+                url('https://i.pinimg.com/1200x/f6/61/a9/f661a9ddd0a1c19c9360df02578a9f35.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Subtle animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255, 77, 148, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 40% 80%, rgba(255, 182, 193, 0.1) 0%, transparent 20%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Modern Bento Grid Layout - Optimized for mobile */
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, auto);
+            gap: 15px;
+            width: 100%;
+            max-width: 450px;
+            z-index: 1;
+            transition: opacity 0.5s ease;
+            position: relative;
+        }
+
+        .tile {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .tile:hover { 
+            transform: translateY(-6px) scale(1.02); 
+            box-shadow: var(--shadow-hover); 
+        }
+
+        /* Grid Assignments with better proportions */
+        .tile-hero { 
+            grid-column: span 4; 
+            grid-row: 1;
+        }
+        .tile-date { 
+            grid-column: span 2; 
+            grid-row: 2;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white; 
+            min-height: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tile-date::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(30deg);
+            animation: shine 3s infinite linear;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+
+        .tile-img { 
+            grid-column: span 2; 
+            grid-row: 2;
+            height: 120px;
+        }
+        .tile-quote { 
+            grid-column: span 4; 
+            grid-row: 3;
+            padding: 24px 20px; 
+            text-align: center; 
+        }
+
+        .hero-content { 
+            padding: 32px 24px; 
+            text-align: center; 
+            background: linear-gradient(180deg, var(--glass) 0%, rgba(255, 255, 255, 0.6) 100%);
+        }
+
+        h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.9rem; 
+            color: var(--primary-dark); 
+            margin: 16px 0 24px;
+            line-height: 1.3;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .hero-subtitle {
+            color: #ff1493; 
+            font-weight: 800; 
+            font-size: 0.9rem;
+            letter-spacing: 2.5px; 
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .date-box {
+            padding: 20px;
+        }
+
+        .date-box span:nth-child(1) { 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            letter-spacing: 3px; 
+            opacity: 0.9; 
+            text-transform: uppercase;
+        }
+        .date-box span:nth-child(2) { 
+            font-size: 3rem; 
+            font-weight: 900; 
+            margin-top: 4px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .img-container { 
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .img-container img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .img-container:hover img {
+            transform: scale(1.08);
+        }
+
+        .quote-text { 
+            font-family: 'Dancing Script', cursive; 
+            font-size: 1.4rem; 
+            color: var(--primary-dark); 
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        /* Button Refinement */
+        .btn-stack { 
+            display: flex; 
+            gap: 12px; 
+            margin-top: 28px; 
+            justify-content: center; 
+            position: relative;
+        }
+
+        button { 
+            padding: 16px 32px; 
+            border-radius: 20px; 
+            border: none; 
+            font-size: 0.95rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        button:hover::after {
+            left: 100%;
+        }
+        
+        #yesBtn { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white; 
+            box-shadow: 0 6px 20px rgba(255, 20, 147, 0.3);
+            flex-grow: 1;
+            min-width: 140px;
+        }
+
+        #yesBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4);
+        }
+
+        #noBtn { 
+            background: white; 
+            color: #666; 
+            border: 1.5px solid #eee;
+            font-size: 0.85rem;
+            padding: 16px 24px;
+        }
+
+        #noBtn:hover {
+            background: #f8f8f8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Music Controls Optimization */
+        #music-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: var(--glass-dark);
+            backdrop-filter: blur(12px);
+            padding: 10px 16px;
+            border-radius: 40px;
+            border: 1.5px solid var(--border);
+            display: flex;
+            gap: 8px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        #music-controls:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        #music-controls button {
+            padding: 8px 16px;
+            font-size: 0.75rem;
+            border-radius: 20px;
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        /* Success Screen */
+        .success-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--success-gradient);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .poem-card {
+            background: var(--glass-dark);
+            padding: 36px 28px;
+            border-radius: 32px;
+            border: 2px solid var(--accent);
+            max-width: 340px;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8);
+            box-shadow: var(--shadow-hover);
+            backdrop-filter: blur(20px);
+            margin: 20px 0;
+        }
+
+        .success-title {
+            font-size: 3.2rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .poem-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            color: var(--primary-dark);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .floating-element {
+            position: fixed;
+            z-index: 2001;
+            pointer-events: none;
+            animation: floatUp 3.5s ease-in forwards;
+            opacity: 0;
+            filter: drop-shadow(0 0 8px rgba(255, 77, 148, 0.3));
+        }
+
+        @keyframes floatUp {
+            0% { 
+                transform: translateY(0) scale(0.5) rotate(0deg); 
+                opacity: 0; 
+            }
+            10% { 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(-100vh) scale(1.2) rotate(180deg); 
+                opacity: 0; 
+            }
+        }
+
+        .final-message {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-top: 30px;
+            opacity: 0.9;
+        }
+
+        /* Responsive improvements */
+        @media (max-width: 480px) {
+            .bento {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, auto);
+                gap: 12px;
+            }
+            
+            .tile-hero, .tile-date, .tile-img, .tile-quote {
+                grid-column: span 1;
+                grid-row: auto;
+            }
+            
+            .tile-date, .tile-img {
+                height: 100px;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .btn-stack {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bento" id="bentoGrid">
+        <div class="tile tile-hero">
+            <div class="hero-content">
+                <p class="hero-subtitle">Hey Enny ✨</p>
+                <h1>Will You Be My Valentine?</h1>
+                <div class="btn-stack">
+                    <button id="yesBtn" onclick="celebrate()">Yes! 💕</button>
+                    <button id="noBtn" onmouseover="moveButton()" onclick="handleNoClick()">No</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tile tile-date date-box">
+            <span>FEBRUARY</span>
+            <span>14</span>
+        </div>
+
+        <div class="tile tile-img img-container">
+            <img src="https://i.pinimg.com/736x/ca/8e/2d/ca8e2dfdc877efadd5cded47540c9e20.jpg " alt="Romantic Heart" loading="lazy">
+        </div>
+
+        <div class="tile tile-quote">
+            <div class="quote-text">
+                "Every love story is beautiful,<br>but ours is my favorite."
+            </div>
+        </div>
+    </div>
+
+    <div id="success" class="success-screen">
+        <h1 class="success-title">Yay! 😍</h1>
+        <div class="poem-card" id="poemCard">
+            <p class="poem-text">
+                I'm so lucky to have you.<br><br>
+                Through the highs and lows,<br>
+                Through the shouts and arguements ,<br>
+                I still choose you — every day.<br>
+                You're my partner in crime , my love,
+            <br>
+                And my princess
+                <BR> Every love story is beautiful,
+but ours is my favorite.
+            </p>
+        </div>
+        <p class="final-message">Love you Enny  ❤️</p>
+    </div>
+
+    <audio id="bgMusic" loop preload="metadata">
+        <source src="mm.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Preload important elements
+        window.addEventListener('load', () => {
+            // Preload the success screen
+            const successScreen = document.getElementById('success');
+            successScreen.style.display = 'none';
+            
+            // Try to play music with user interaction
+            const musicPlay = () => {
+                const bgMusic = document.getElementById('bgMusic');
+                const playPromise = bgMusic.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        createMusicControls();
+                        // Remove the event listener after first interaction
+                        document.removeEventListener('click', musicPlay);
+                        document.removeEventListener('touchstart', musicPlay);
+                    });
+                }
+            };
+            
+            // Wait for user interaction to play music
+            document.addEventListener('click', musicPlay);
+            document.addEventListener('touchstart', musicPlay);
+            
+            // Preload floating elements
+            preloadFloatingElements();
+        });
+
+        function createMusicControls() {
+            if(document.getElementById('music-controls')) return;
+            const controls = document.createElement('div');
+            controls.id = 'music-controls';
+            controls.innerHTML = `
+                <button onclick="playMusic(this)">🎵 Play Music</button>
+            `;
+            document.body.appendChild(controls);
+        }
+
+        function playMusic(btn) {
+            const bgMusic = document.getElementById('bgMusic');
+            bgMusic.play()
+                .then(() => {
+                    if(btn.parentElement) {
+                        btn.parentElement.style.display = 'none';
+                    }
+                })
+                .catch(console.error);
+        }
+
+        // Button Interaction Logic
+        function moveButton() {
+            const btn = document.getElementById('noBtn');
+            const bento = document.querySelector('.bento');
+            const bentoRect = bento.getBoundingClientRect();
+            
+            // Keep button within bento container
+            const maxX = bentoRect.width - btn.offsetWidth - 40;
+            const maxY = bentoRect.height - btn.offsetHeight - 40;
+            
+            const x = Math.random() * maxX + 20;
+            const y = Math.random() * maxY + 20;
+            
+            btn.style.position = 'absolute';
+            btn.style.left = `${x}px`;
+            btn.style.top = `${y}px`;
+            btn.style.transform = 'none'; // Remove hover transform
+        }
+
+        function handleNoClick() {
+            // Create a cute notification instead of alert
+            createNotification("Nice try! We're destined. 😂❤️");
+            moveButton();
+        }
+
+        function createNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%) translateY(-100%);
+                background: var(--glass-dark);
+                backdrop-filter: blur(12px);
+                padding: 12px 24px;
+                border-radius: 20px;
+                border: 1.5px solid var(--border);
+                box-shadow: var(--shadow);
+                z-index: 3000;
+                font-weight: 600;
+                color: var(--primary-dark);
+                transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(-50%) translateY(0)';
+            }, 10);
+            
+            // Animate out and remove
+            setTimeout(() => {
+                notification.style.transform = 'translateX(-50%) translateY(-100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+
+        function preloadFloatingElements() {
+            // Pre-create floating elements for smoother animation
+            for(let i = 0; i < 20; i++) {
+                spawnElement();
+                document.querySelectorAll('.floating-element').forEach(el => el.remove());
+            }
+        }
+
+        function spawnElement() {
+            const symbols = ['❤️', '💖', '✨', '🌸', '🌹', '💕', '💝', '🎀'];
+            const el = document.createElement('div');
+            el.className = 'floating-element';
+            el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.top = '100vh';
+            el.style.fontSize = (Math.random() * 25 + 25) + 'px';
+            el.style.animationDelay = (Math.random() * 0.5) + 's';
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 4000);
+        }
+
+        function celebrate() {
+            const bento = document.getElementById('bentoGrid');
+            const success = document.getElementById('success');
+            const poem = document.getElementById('poemCard');
+            
+            // Play music if not already playing
+            const bgMusic = document.getElementById('bgMusic');
+            bgMusic.play().catch(console.error);
+            
+            // Fade out bento grid
+            bento.style.opacity = '0';
+            bento.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                bento.style.display = 'none';
+                success.style.display = 'flex';
+                
+                // Animate poem card
+                setTimeout(() => {
+                    poem.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                    poem.style.opacity = '1';
+                    poem.style.transform = 'scale(1)';
+                }, 100);
+
+                // Start floating elements
+                const floatInterval = setInterval(spawnElement, 120);
+                
+                // Stop after 8 seconds
+                setTimeout(() => clearInterval(floatInterval), 8000);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
