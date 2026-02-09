@@ -418,6 +418,47 @@
                 width: 100%;
             }
         }
+        /* Responsive improvements */
+        @media (max-width: 480px) {
+            .bento {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                gap: 16px;
+                padding-bottom: 40px; /* Space for the floating 'No' button */
+            }
+            
+            .tile-hero, .tile-date, .tile-img, .tile-quote {
+                grid-column: span 1;
+                grid-row: auto;
+            }
+            
+            .tile-date {
+                height: 100px;
+                order: 2; /* Keeps date under the hero */
+            }
+
+            /* Making the image bigger on mobile */
+            .tile-img {
+                height: 280px; /* Increased height for mobile prominence */
+                order: 3;
+            }
+            
+            .tile-hero { order: 1; }
+            .tile-quote { order: 4; }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .btn-stack {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -465,7 +506,7 @@
 but ours is my favorite.
             </p>
         </div>
-        <p class="final-message">Love you Enny  ❤️</p>
+        <p class="final-message">Love you Eniola   ❤️</p>
     </div>
 
     <audio id="bgMusic" loop preload="metadata">
